@@ -67,11 +67,7 @@ def get_user():
     print("info", info, type(info))
     err_code = 0
     msg = "success"
-    data = []
-    if info:
-        # data = [(ua.id, ua.username, ua.email) for ua in [info]]
-        pass
-    else:
+    if not info:
         err_code = 1
         msg = "not found"
     return {
@@ -83,7 +79,8 @@ def get_user():
 
 @user.route('/list', methods=['GET'])
 def list_user():
-    uas = db.session.query(UserArticle).all()
+    # uas = db.session.query(UserArticle).all()
+    uas = UserArticle.query.all()
     err_code = 0
     msg = "success"
     return {
